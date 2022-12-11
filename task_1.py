@@ -204,8 +204,8 @@ class Student:
             raise TypeError("Введите имя ученика буквами!")
         if not isinstance(age, int) or age < 6:
             raise ValueError("Параметр \"age\" для среднестатистического ученика не может быть меньше 6!")
-        if not isinstance(grader, int) or grader < 0:
-            raise ValueError("Введите ненулевое положительное целое значение для параметра \"grader\"!")
+        if not isinstance(grader, int) or grader < 0 or grader > 11:
+            raise ValueError("Введите положительное целое значение для параметра \"grader\" от 1 до 11!")
         self.name, self.age, self.grader = name, age, grader
         self._init_dict = None
         self.init_dictionary()
@@ -229,8 +229,6 @@ class Student:
             print("Средняя школа.")
         elif 10 <= self.grader <= 11:
             print("Старшая школа.")
-        else:
-            raise ValueError("Количество классов не может превышать 11!")
 
 
 if __name__ == "__main__":
