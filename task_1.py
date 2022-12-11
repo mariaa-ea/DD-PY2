@@ -49,9 +49,9 @@ class Kettle:
         if not isinstance(material, str):
             raise TypeError("Параметр \"material\" должен быть типа \"str\"!")
         if not isinstance(volume, int | float) or volume < 0:
-            raise TypeError("Параметр \"volume\" должен быть целым или дробным и положительным!")
+            raise ValueError("Параметр \"volume\" должен быть целым или дробным и положительным!")
         if not isinstance(rated_power, int) or rated_power < 0:
-            raise TypeError("Параметр \"rated_power\" должен быть целочисленным и положительным!")
+            raise ValueError("Параметр \"rated_power\" должен быть целочисленным и положительным!")
         self.name, self.material, self.volume, self.rated_power = name, material, volume, rated_power
         self.voltage = 220
         self.init_list()
@@ -65,8 +65,8 @@ class Kettle:
 
     def get_who_a_u_today(self, your_name: str) -> None:
         self._your_name = your_name
-        answer = choice(['чайник', 'не чайник'])
-        if answer == 'чайник':
+        answer = choice(["чайник", "не чайник"])
+        if answer == "чайник":
             print(f"К сожалению, сегодня вы, {self._your_name}, являетесь {answer}ом. "
                   f"Наберитесь терпения. Завтра повезет больше! (наверное)")
         else:
@@ -128,8 +128,7 @@ class Bird:
             self.ability_to_fly = ability_to_fly
         else:
             raise ValueError("Введено некорректное значение параметра "
-                             "\"ability_to_fly\"! Ожидаемый ввод:\"Да\""
-                             " или \"Нет\".")
+                             "\"ability_to_fly\"! Ожидаемый ввод:\"Да\" или \"Нет\".")
         self.bird = bird
         self.breed = breed
         self._init_length = None
@@ -179,11 +178,11 @@ class Student:
 
     Как будут представлены данные в виде словаря?
     >>> student.init_dictionary()
-    {'age': 7, 'class_': 1, 'name': 'Victor'}
+    {'age': 7, 'grader': 1, 'name': 'Victor'}
 
     Хотите вывести словарь на экран?
     >>> student.show_init_params()
-    {'age': 7, 'class_': 1, 'name': 'Victor'}
+    {'age': 7, 'grader': 1, 'name': 'Victor'}
 
     Если хотите узнать ступень обучения ученика:
     >>> student.get_the_level_of_education()
@@ -204,12 +203,10 @@ class Student:
         if not name.isalpha():
             raise TypeError("Введите имя ученика буквами!")
         if not isinstance(age, int) or age < 6:
-            raise TypeError("Параметр \"age\" для среднестатистического "
-                            "ученика не может быть меньше 6!")
+            raise ValueError("Параметр \"age\" для среднестатистического ученика не может быть меньше 6!")
         if not isinstance(grader, int) or grader < 0:
-            raise TypeError("Введите ненулевое положительное целое значение "
-                            "для параметра \"class_\"!")
-        self.name, self.age, self.class_ = name, age, grader
+            raise ValueError("Введите ненулевое положительное целое значение для параметра \"grader\"!")
+        self.name, self.age, self.grader = name, age, grader
         self._init_dict = None
         self.init_dictionary()
 
@@ -226,11 +223,11 @@ class Student:
         print(self._init_dict)
 
     def get_the_level_of_education(self) -> None:
-        if 1 <= self.class_ <= 4:
+        if 1 <= self.grader <= 4:
             print("Начальная школа.")
-        elif 5 <= self.class_ <= 9:
+        elif 5 <= self.grader <= 9:
             print("Средняя школа.")
-        elif 10 <= self.class_ <= 11:
+        elif 10 <= self.grader <= 11:
             print("Старшая школа.")
         else:
             raise ValueError("Количество классов не может превышать 11!")
